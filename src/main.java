@@ -2,115 +2,89 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int choice;
-        double num1, num2, result;
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("=======================================");
+        System.out.println("       SMART CONSOLE CALCULATOR        ");
+        System.out.println("=======================================");
 
         while (true) {
-            System.out.println("\n===================================");
-            System.out.println("      SMART CONSOLE CALCULATOR      ");
-            System.out.println("===================================");
-            System.out.println("1. Addition");
-            System.out.println("2. Subtraction");
-            System.out.println("3. Multiplication");
-            System.out.println("4. Division");
-            System.out.println("5. Modulus");
-            System.out.println("6. Power");
-            System.out.println("7. Square Root");
-            System.out.println("8. Percentage");
-            System.out.println("9. Exit");
-            System.out.print("\nEnter your choice: ");
-            
-            choice = sc.nextInt();
+            System.out.println("\nSelect an Operation:");
+            System.out.println("1. Addition (+)");
+            System.out.println("2. Subtraction (-)");
+            System.out.println("3. Multiplication (*)");
+            System.out.println("4. Division (/)");
+            System.out.println("5. Modulus (%)");
+            System.out.println("6. Power (x^y)");
+            System.out.println("7. Square Root (sqrt)");
+            System.out.println("8. Percentage (%)");
+            System.out.println("9. Exit Application");
+            System.out.print("Enter your choice (1-9): ");
+
+            int choice = scanner.nextInt();
 
             if (choice == 9) {
-                System.out.println("\nThank you for using Smart Console Calculator! Application Terminated.");
+                System.out.println("\nThank you for using Smart Console Calculator. Exiting...");
                 break;
             }
 
-            switch (choice) {
-                case 1: // Addition
-                    System.out.print("Enter First Number: ");
-                    num1 = sc.nextDouble();
-                    System.out.print("Enter Second Number: ");
-                    num2 = sc.nextDouble();
-                    result = num1 + num2;
-                    System.out.println("👉 Result = " + result);
-                    break;
+            double num1 = 0, num2 = 0;
 
-                case 2: // Subtraction
-                    System.out.print("Enter First Number: ");
-                    num1 = sc.nextDouble();
-                    System.out.print("Enter Second Number: ");
-                    num2 = sc.nextDouble();
-                    result = num1 - num2;
-                    System.out.println("👉 Result = " + result);
-                    break;
-
-                case 3: // Multiplication
-                    System.out.print("Enter First Number: ");
-                    num1 = sc.nextDouble();
-                    System.out.print("Enter Second Number: ");
-                    num2 = sc.nextDouble();
-                    result = num1 * num2;
-                    System.out.println("👉 Result = " + result);
-                    break;
-
-                case 4: // Division
-                    System.out.print("Enter Dividend (Number to divide): ");
-                    num1 = sc.nextDouble();
-                    System.out.print("Enter Divisor: ");
-                    num2 = sc.nextDouble();
-                    if (num2 == 0) {
-                        System.out.println("❌ Error: Division by zero is not allowed!");
-                    } else {
-                        result = num1 / num2;
-                        System.out.println("👉 Result = " + result);
-                    }
-                    break;
-
-                case 5: // Modulus (Remainder)
-                    System.out.print("Enter First Number: ");
-                    num1 = sc.nextDouble();
-                    System.out.print("Enter Second Number: ");
-                    num2 = sc.nextDouble();
-                    result = num1 % num2;
-                    System.out.println("👉 Result (Remainder) = " + result);
-                    break;
-
-                case 6: // Power (x^y)
-                    System.out.print("Enter Base Number: ");
-                    num1 = sc.nextDouble();
-                    System.out.print("Enter Exponent/Power: ");
-                    num2 = sc.nextDouble();
-                    result = Math.pow(num1, num2);
-                    System.out.println("👉 Result = " + result);
-                    break;
-
-                case 7: // Square Root
-                    System.out.print("Enter Number: ");
-                    num1 = sc.nextDouble();
-                    if (num1 < 0) {
-                        System.out.println("❌ Error: Cannot calculate square root of a negative number!");
-                    } else {
-                        result = Math.sqrt(num1);
-                        System.out.println("👉 Square Root = " + result);
-                    }
-                    break;
-
-                case 8: // Percentage
-                    System.out.print("Enter Total Value: ");
-                    num1 = sc.nextDouble();
-                    System.out.print("Enter Percentage Rate (e.g., 10 for 10%): ");
-                    num2 = sc.nextDouble();
-                    result = (num1 * num2) / 100;
-                    System.out.println("👉 Percentage Value = " + result);
-                    break;
-
-                default:
-                    System.out.println("❌ Invalid Choice! Please select a valid option.");
+            // Handling operations that require two inputs
+            if (choice >= 1 && choice <= 6) {
+                System.out.print("Enter first number: ");
+                num1 = scanner.nextDouble();
+                System.out.print("Enter second number: ");
+                num2 = scanner.nextDouble();
+            } else if (choice == 7 || choice == 8) {
+                System.out.print("Enter the number: ");
+                num1 = scanner.nextDouble();
             }
+
+            switch (choice) {
+                case 1:
+                    System.out.println("Result: " + (num1 + num2));
+                    break;
+                case 2:
+                    System.out.println("Result: " + (num1 - num2));
+                    break;
+                case 3:
+                    System.out.println("Result: " + (num1 * num2));
+                    break;
+                case 4:
+                    if (num2 == 0) {
+                        System.out.println("Error: Division by zero is not allowed.");
+                    } else {
+                        System.out.println("Result: " + (num1 / num2));
+                    }
+                    break;
+                case 5:
+                    if (num2 == 0) {
+                        System.out.println("Error: Modulus by zero is undefined.");
+                    } else {
+                        System.out.println("Result: " + (num1 % num2));
+                    }
+                    break;
+                case 6:
+                    System.out.println("Result: " + Math.pow(num1, num2));
+                    break;
+                case 7:
+                    if (num1 < 0) {
+                        System.out.println("Error: Cannot calculate square root of a negative number.");
+                    } else {
+                        System.out.println("Result: " + Math.sqrt(num1));
+                    }
+                    break;
+                case 8:
+                    System.out.print("Enter percentage rate (e.g., 10 for 10%): ");
+                    double rate = scanner.nextDouble();
+                    System.out.println("Result: " + ((num1 * rate) / 100));
+                    break;
+                default:
+                    System.out.println("Invalid Selection. Please choose between 1 and 9.");
+            }
+            System.out.println("---------------------------------------");
         }
-        sc.close();
+        scanner.close();
     }
 }
